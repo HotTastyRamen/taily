@@ -4,16 +4,42 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b92e40e1-85af-491b-81be-c780d3c83f5a" name="Changes" comment="successful db connection">
-      <change afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+    <list default="true" id="b92e40e1-85af-491b-81be-c780d3c83f5a" name="Changes" comment="added .env and .env.example">
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/DTOs/RegisterRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/entities/BaseEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/entities/auth/AuthUserEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/entities/auth/Privilege.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/entities/auth/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/entities/auth/enumes/Converters/PrivilegeConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/entities/auth/enumes/Converters/RoleConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/entities/auth/enumes/Privileges.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/entities/auth/enumes/Roles.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/repositories/AuthUserRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/repositories/PrivilegesRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/repositories/RoleRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/services/AuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/services/AuthServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/services/RoleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/services/RoleServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V1__init.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V1__insert_roles_and_privilege.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/AuthServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/AuthServiceApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -43,6 +69,11 @@
     "git-widget-placeholder": "main"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -76,7 +107,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747872519862</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="added .env and .env.example">
+      <option name="closed" value="true" />
+      <created>1747995157491</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1747995157491</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -94,6 +133,7 @@
     <MESSAGE value="test commit" />
     <MESSAGE value="add all commit" />
     <MESSAGE value="successful db connection" />
-    <option name="LAST_COMMIT_MESSAGE" value="successful db connection" />
+    <MESSAGE value="added .env and .env.example" />
+    <option name="LAST_COMMIT_MESSAGE" value="added .env and .env.example" />
   </component>
 </project>

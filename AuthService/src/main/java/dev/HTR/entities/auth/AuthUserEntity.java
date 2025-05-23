@@ -1,0 +1,42 @@
+package dev.HTR.entities.auth;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import dev.HTR.entities.BaseEntity;
+import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.Set;
+
+@Entity
+@Data
+@Table(name="users")
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+public class AuthUserEntity extends BaseEntity {
+
+    static BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); ;
+
+    public AuthUserEntity(Long id, String username, String password, boolean enable, Set<Role> roles){
+        this.password = passwordEncoder.encode(password);
+        this.username = username;
+        this.enable = enable;
+        this.roles = roles;
+    }
+
+    private String username;
+
+    private String password;
+
+    private boolean enable;
+
+    @JsonBackReference
+    @ToString.Exclude
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+
+}
