@@ -1,7 +1,7 @@
 package dev.HTR.services;
 
-import dev.HTR.DTOs.RegisterRequest;
 import dev.HTR.entities.auth.AuthUserEntity;
+import dev.HTR.exeptions.AlreadyExistsException;
 import dev.HTR.repositories.AuthUserRepo;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -13,21 +13,23 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
-public class AuthServiceImpl implements UserDetailsService {
+public class AuthServiceImpl implements UserDetailsService, AuthService {
 
-    @Autowired
     private final AuthUserRepo authUserRepo;
 
-    @Autowired
     private final RoleService roleService;
 
     public Optional<AuthUserEntity> findByUsername(String username){
         return authUserRepo.findByUsername(username);
     }
 
+    public AuthUserEntity save (AuthUserEntity authUserEntity){
+        return authUserRepo.save(authUserEntity);
+    }
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -41,5 +43,16 @@ public class AuthServiceImpl implements UserDetailsService {
         );
     }
 
+    public void createNewUser(AuthUserEntity authUserEntity){
+        Optional<AuthUserEntity> existingUser = findByUsername(authUserEntity.getUsername());
 
+        if (existingUser.isPresent()) {
+            throw new AlreadyExistsException("User with username '"
+                                            + authUserEntity.getUsername()
+                                            + "' already exists.");
+        }
+
+        roleService.assignDefaultRolesToUser(authUserEntity);
+        save(authUserEntity);
+    }
 }

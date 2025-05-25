@@ -3,5 +3,10 @@ package dev.HTR.repositories;
 import dev.HTR.entities.auth.Role;
 import org.springframework.data.repository.CrudRepository;
 
-public interface RoleRepo extends CrudRepository<Role, Long> {
+import java.util.Optional;
+
+public interface RoleRepo
+        extends CrudRepository<Role, Long> {
+
+    Optional<Role> findByName(String name);
 }

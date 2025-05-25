@@ -9,9 +9,12 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface AuthUserRepo extends PagingAndSortingRepository<AuthUserEntity, Long> {
+public interface AuthUserRepo
+        extends PagingAndSortingRepository<AuthUserEntity, Long> {
 
     Optional<Iterable<AuthUserEntity>> findAll(Example<AuthUserEntity> example, Pageable pageable );
 
     Optional<AuthUserEntity> findByUsername (String username);
+
+    AuthUserEntity save (AuthUserEntity authUserEntity);
 }
