@@ -1,6 +1,5 @@
 package dev.HTR.services;
 
-import dev.HTR.DTOs.RegisterRequest;
 import dev.HTR.entities.auth.AuthUserEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,5 +12,7 @@ public interface AuthService {
     UserDetails loadUserByUsername(String username);
 
     public Optional<AuthUserEntity> findByUsername(String username);
+
+    public AuthUserEntity createNewUser(AuthUserEntity authUserEntity);
 
 }

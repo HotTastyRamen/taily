@@ -31,10 +31,3 @@ CREATE TABLE roles_privileges (
     FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE,
     FOREIGN KEY (privilege_id) REFERENCES "privileges"(id) ON DELETE CASCADE
 );
-
-
-
-
-
-
-

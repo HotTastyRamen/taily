@@ -3,13 +3,16 @@ package dev.HTR.controllers;
 
 import dev.HTR.DTOs.JwtRequest;
 import dev.HTR.DTOs.JwtResponse;
+import dev.HTR.DTOs.RegisterRequest;
+import dev.HTR.entities.auth.AuthUserEntity;
 import dev.HTR.services.AuthService;
 import dev.HTR.utils.JwtUtils;
-import lombok.NoArgsConstructor;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +35,18 @@ public class AuthController {
         String token = jwtUtils.generateToken(userDetails);
 
         return ResponseEntity.ok(new JwtResponse(token));
+
+    }
+
+    @PostMapping("/reg")
+    public ResponseEntity<?> createNewUser (@RequestBody RegisterRequest registerRequest){
+        AuthUserEntity reqUser = new AuthUserEntity(
+                registerRequest.getUsername(),
+                registerRequest.getPassword(),
+                true
+                );
+        AuthUserEntity newUser = authService.createNewUser(reqUser);
+        return ResponseEntity.ok(newUser);
 
     }
 }

@@ -15,13 +15,19 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = false)
 public class AuthUserEntity extends BaseEntity {
 
-    static BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); ;
+    static BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public AuthUserEntity(Long id, String username, String password, boolean enable, Set<Role> roles){
+    public AuthUserEntity(String username, String password, boolean enable, Set<Role> roles){
         this.password = passwordEncoder.encode(password);
         this.username = username;
         this.enable = enable;
         this.roles = roles;
+    }
+
+    public AuthUserEntity(String username, String password, boolean enable){
+        this.password = passwordEncoder.encode(password);
+        this.username = username;
+        this.enable = enable;
     }
 
     private String username;

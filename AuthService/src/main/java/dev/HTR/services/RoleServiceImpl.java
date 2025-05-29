@@ -2,11 +2,10 @@ package dev.HTR.services;
 
 import dev.HTR.entities.auth.AuthUserEntity;
 import dev.HTR.entities.auth.Role;
-import dev.HTR.repositories.AuthUserRepo;
+import dev.HTR.entities.auth.enumes.Roles;
 import dev.HTR.repositories.RoleRepo;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -18,13 +17,13 @@ public class RoleServiceImpl implements RoleService{
     private final RoleRepo roleRepository;
 
     public Role findByName(String name) {
-        return roleRepository.findByName(name)
+        return roleRepository.findByName(Roles.valueOf("USER"))
                 .orElseThrow(() -> new RuntimeException("Role not found: " + name));
     }
 
     public Set<Role> getDefaultRoles() {
         Set<Role> roles = new HashSet<>();
-        roles.add(findByName("ROLE_USER")); // имя должно соответствовать значению в БД
+        roles.add(findByName("USER")); // имя должно соответствовать значению в БД
         return roles;
     }
 

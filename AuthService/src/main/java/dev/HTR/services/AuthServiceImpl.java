@@ -5,7 +5,6 @@ import dev.HTR.exeptions.AlreadyExistsException;
 import dev.HTR.repositories.AuthUserRepo;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,7 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -43,7 +41,7 @@ public class AuthServiceImpl implements UserDetailsService, AuthService {
         );
     }
 
-    public void createNewUser(AuthUserEntity authUserEntity){
+    public AuthUserEntity createNewUser(AuthUserEntity authUserEntity){
         Optional<AuthUserEntity> existingUser = findByUsername(authUserEntity.getUsername());
 
         if (existingUser.isPresent()) {
@@ -53,6 +51,6 @@ public class AuthServiceImpl implements UserDetailsService, AuthService {
         }
 
         roleService.assignDefaultRolesToUser(authUserEntity);
-        save(authUserEntity);
+        return save(authUserEntity);
     }
 }

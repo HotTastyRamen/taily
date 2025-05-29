@@ -4,34 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b92e40e1-85af-491b-81be-c780d3c83f5a" name="Changes" comment="base bd functionality">
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/DTOs/JwtRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/DTOs/JwtResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/configs/JWTRequestFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/configs/SecurityCong.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/controllers/AuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/controllers/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/exeptions/AlreadyExistsException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/exeptions/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/utils/JwtUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V3__insert_basic_users.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V4__insert_role_to_users.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="b92e40e1-85af-491b-81be-c780d3c83f5a" name="Changes" comment="JWT creation and use functionality">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/HTR/entities/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/entities/BaseEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/HTR/entities/auth/enumes/Privileges.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/entities/auth/enumes/Privileges.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/HTR/entities/auth/enumes/Roles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/entities/auth/enumes/Roles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/HTR/repositories/AuthUserRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/repositories/AuthUserRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/HTR/repositories/PrivilegesRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/repositories/PrivilegesRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/HTR/DTOs/RegisterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/DTOs/RegisterRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/HTR/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/controllers/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/HTR/entities/auth/AuthUserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/entities/auth/AuthUserEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/HTR/repositories/RoleRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/repositories/RoleRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/HTR/services/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/services/AuthService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/HTR/services/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/services/AuthServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/HTR/services/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/services/RoleService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/HTR/services/RoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/HTR/services/RoleServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V1__insert_roles_and_privilege.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V2__insert_roles_and_privilege.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V1__init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V1__init.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +144,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748043371318</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="JWT creation and use functionality">
+      <option name="closed" value="true" />
+      <created>1748195606635</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1748195606635</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -182,7 +172,8 @@
     <MESSAGE value="successful db connection" />
     <MESSAGE value="added .env and .env.example" />
     <MESSAGE value="base bd functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="base bd functionality" />
+    <MESSAGE value="JWT creation and use functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="JWT creation and use functionality" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
