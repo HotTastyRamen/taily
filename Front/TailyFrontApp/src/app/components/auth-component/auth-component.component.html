@@ -1,0 +1,61 @@
+<div class="auth-container">
+  <form class="form" (ngSubmit)="auth()" novalidate>
+    <div class="heading-with-icon">
+      <img src = '../../../assets/0.5.png' class = 'icon'/>
+
+      <h2 class="form-title">Taily</h2>
+    </div>
+    <div class="input-group">
+      <input
+        id="username"
+        type="text"
+        [(ngModel)]="username"
+        name="username"
+        placeholder=" "
+        required
+      />
+      <label for="username">Логин</label>
+    </div>
+
+    <div class="input-group">
+      <input
+        id="password"
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        placeholder=" "
+        required
+      />
+      <label for="password">Пароль</label>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <button class="button" type="submit">Войти</button>
+
+    <!-- Появляется после успешного логина -->
+    <div *ngIf="loginSuccess" class = "verification-container">
+      <div class="input-group" [@fadeIn]>
+        <input
+          id="smsCode"
+          type="text"
+          maxlength="6"
+          [(ngModel)]="smsCode"
+          name="smsCode"
+          placeholder=" "
+          required
+        />
+        <label for="smsCode">Код из SMS</label>
+      </div>
+
+      <div class="success-verification">
+        <span>Подтвердите вход</span>
+        <button class="verify-button" type="button" (click)="verificate()">
+          ➤
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
