@@ -11,18 +11,20 @@ import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Component
 public class JwtUtils {
 
     @Value("${jwt.secret}")
-    private String secret;
+    private String authSecret;
+
+    @Value("${jwt.verSecret}")
+    private String verSecret;
 
     @Value("${jwt.lifetime}")
     private Duration jwtLifetime;
 
-    public String generateToken(UserDetails userDetails){
+    public String generateAuthToken(UserDetails userDetails){
         Map<String, Object> claims = new HashMap<>();
         List<String> roleList = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
@@ -36,19 +38,23 @@ public class JwtUtils {
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(issuedDate)
                 .setExpiration(expiredDate)
-                .signWith(SignatureAlgorithm.HS256, secret)
+                .signWith(SignatureAlgorithm.HS256, authSecret)
                 .compact();
     }
 
-    public String getUsername(String token) {
-        return getAllClaimsFromJWT(token).getSubject();
+    public String getUsernameFromAuthToken(String token) {
+        return getAllClaimsFromJWT(token, authSecret).getSubject();
     }
 
-    public List<String> getRoles(String token){
-        return getAllClaimsFromJWT(token).get("roles", List.class);
+    public String getUsernameFromVerificationToken(String token) {
+        return getAllClaimsFromJWT(token, verSecret).getSubject();
     }
 
-    private Claims getAllClaimsFromJWT(String token){
+    public List<String> getRolesFromAuthToken(String token){
+        return getAllClaimsFromJWT(token, authSecret).get("roles", List.class);
+    }
+
+    private Claims getAllClaimsFromJWT(String token, String secret){
         return Jwts.parser()
                 .setSigningKey(secret)
                 .parseClaimsJws(token)

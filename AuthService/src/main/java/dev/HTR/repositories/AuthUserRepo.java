@@ -16,5 +16,7 @@ public interface AuthUserRepo
 
     Optional<AuthUserEntity> findByUsername (String username);
 
+    Optional<AuthUserEntity> findById (Long id);
+
     AuthUserEntity save (AuthUserEntity authUserEntity);
 }

@@ -25,15 +25,22 @@ public class AuthServiceImpl implements UserDetailsService, AuthService {
         return authUserRepo.findByUsername(username);
     }
 
+    public Optional<AuthUserEntity> findById(Long userId){
+        return authUserRepo.findById(userId);
+    }
+
     public AuthUserEntity save (AuthUserEntity authUserEntity){
+
         return authUserRepo.save(authUserEntity);
     }
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AuthUserEntity user = findByUsername(username).orElseThrow(()-> new UsernameNotFoundException(
-                String.format("Пользователь '%s' не найден", username)
+        AuthUserEntity user = findByUsername(username).orElseThrow(
+                ()-> new UsernameNotFoundException(
+                        String.format("Пользователь '%s' не найден", username)
         ));
+
         return new User(
                 user.getUsername(),
                 user.getPassword(),
@@ -42,7 +49,8 @@ public class AuthServiceImpl implements UserDetailsService, AuthService {
     }
 
     public AuthUserEntity createNewUser(AuthUserEntity authUserEntity){
-        Optional<AuthUserEntity> existingUser = findByUsername(authUserEntity.getUsername());
+        Optional<AuthUserEntity> existingUser = findByUsername(
+                authUserEntity.getUsername());
 
         if (existingUser.isPresent()) {
             throw new AlreadyExistsException("User with username '"

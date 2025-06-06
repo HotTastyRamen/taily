@@ -7,6 +7,7 @@ import io.jsonwebtoken.SignatureException;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -32,25 +33,46 @@ public class JWTRequestFilter extends OncePerRequestFilter {
     private JwtUtils jwtUtils;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String authHeader = request.getHeader("Authorization");
-        String username = null;
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
         String jwt = null;
+        String username = null;
+
+        // 1. Попробовать извлечь токен из заголовка Authorization
+        String authHeader = request.getHeader("Authorization");
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             jwt = authHeader.substring(7);
+        } else {
+            // 2. Если в заголовке нет — попробовать извлечь токен из cookie
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if ("jwt".equals(cookie.getName())) {
+                        jwt = cookie.getValue();
+                        break;
+                    }
+                }
+            }
+        }
+
+        // 3. Если токен найден — обработать
+        if (jwt != null) {
             try {
-                username = jwtUtils.getUsername(jwt);
+                System.out.println(jwt);
+                username = jwtUtils.getUsernameFromAuthToken(jwt);
             } catch (ExpiredJwtException e) {
                 log.debug("Время жизни токена вышло");
             } catch (SignatureException e) {
                 log.debug("Подпись неправильная");
             }
         }
+
+
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                     username,
                     null,
-                    jwtUtils.getRoles(jwt).stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList())
+                    jwtUtils.getRolesFromAuthToken(jwt).stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList())
             );
             SecurityContextHolder.getContext().setAuthentication(token);
         }
