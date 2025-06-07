@@ -19,6 +19,7 @@ export class AuthService {
   private loginUrl = 'loginCookie';
   private authUrl = 'auth';
   private verUrl = 'getVerToken';
+  private userTestUrl = 'admin/user';
 
   private verjwt = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzQ5MTIxODg1LCJleHAiOjE3NDkyMzkxMjB9.HNBReybwhI_Way5Oi0lGIrbW9NtaYCxUKJGDhrARYrA';
 
@@ -54,6 +55,10 @@ export class AuthService {
 
   getVerToken(code: VerificationCode): Observable<VerJWT> {
     return this.http.post<VerJWT>(this.verUrl, code);
+  }
+
+  getUserTest(username: string): Observable<any> {
+    return this.http.post<VerJWT>(this.userTestUrl, username);
   }
 
   logout(): void {

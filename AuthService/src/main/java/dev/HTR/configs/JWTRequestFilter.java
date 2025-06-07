@@ -22,6 +22,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Configuration
@@ -42,6 +43,7 @@ public class JWTRequestFilter extends OncePerRequestFilter {
         String authHeader = request.getHeader("Authorization");
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             jwt = authHeader.substring(7);
+            System.out.println("JWT extracted from Header" + jwt);
         } else {
             // 2. Если в заголовке нет — попробовать извлечь токен из cookie
             Cookie[] cookies = request.getCookies();
@@ -49,6 +51,7 @@ public class JWTRequestFilter extends OncePerRequestFilter {
                 for (Cookie cookie : cookies) {
                     if ("jwt".equals(cookie.getName())) {
                         jwt = cookie.getValue();
+                        System.out.println("JWT extracted from Cookie" + jwt);
                         break;
                     }
                 }
@@ -69,11 +72,18 @@ public class JWTRequestFilter extends OncePerRequestFilter {
 
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+
+            List<SimpleGrantedAuthority> authorities = jwtUtils.getRolesFromAuthToken(jwt)
+                    .stream()
+                    .map(role -> new SimpleGrantedAuthority("ROLE_" + role)) // ключевой момент
+                    .collect(Collectors.toList());
+
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                     username,
                     null,
-                    jwtUtils.getRolesFromAuthToken(jwt).stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList())
+                    authorities
             );
+            System.out.println(jwtUtils.getRolesFromAuthToken(jwt).stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
             SecurityContextHolder.getContext().setAuthentication(token);
         }
         filterChain.doFilter(request, response);

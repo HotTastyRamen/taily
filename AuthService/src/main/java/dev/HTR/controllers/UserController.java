@@ -19,7 +19,7 @@ public class UserController {
 
     private final AuthService authService;
 
-    @GetMapping("/user")
+    @PostMapping("/user")
     public ResponseEntity<?> getUser(@RequestBody String username){
 
         return ResponseEntity.ok(authService.findByUsername(username));

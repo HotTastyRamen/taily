@@ -1,6 +1,5 @@
 package dev.HTR.configs;
 
-import dev.HTR.services.AuthService;
 import dev.HTR.services.AuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +17,7 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-public class SecurityCong {
+public class SecurityConfig {
 
     @Autowired
     private AuthServiceImpl authService;

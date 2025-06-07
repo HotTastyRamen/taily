@@ -29,7 +29,14 @@ export class AuthComponent {
 
   login() {
     this.authService.login(this.username, this.password).subscribe({
-      next: () => { this.loginSuccess = true; },
+      next: () => { this.loginSuccess = true;
+        this.authService.getUserTest(this.username).subscribe({
+          next: (response) => {
+            console.log('User data:', response);
+          }
+        });
+        this.errorMessage = '';
+       },
       error: () => {
         this.errorMessage = 'Invalid credentials';
       }
