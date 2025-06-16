@@ -13,7 +13,6 @@ export class DocumentService {
   constructor(private http: HttpClient) {}
 
   getCreatedDocuments(
-    creatorId: number,
     title: string,
     page: number,
     size: number,
@@ -21,7 +20,6 @@ export class DocumentService {
     sortDir: 'ASC' | 'DESC'
   ): Observable<Page<DocumentDto>> {
     let params = new HttpParams()
-      .set('creatorId', creatorId.toString())
       .set('page', page.toString())
       .set('size', size.toString())
       .set('sortBy', sortBy)

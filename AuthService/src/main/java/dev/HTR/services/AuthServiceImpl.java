@@ -29,6 +29,13 @@ public class AuthServiceImpl implements UserDetailsService, AuthService {
         return authUserRepo.findById(userId);
     }
 
+    public String getPhoneNumberById(Long id) {
+        Optional<AuthUserEntity> user = authUserRepo.findById(id);
+        System.out.println(user);
+        AuthUserEntity foundUser = user.orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+        return foundUser.getPhoneNumber();
+    }
+
     public AuthUserEntity save (AuthUserEntity authUserEntity){
 
         return authUserRepo.save(authUserEntity);

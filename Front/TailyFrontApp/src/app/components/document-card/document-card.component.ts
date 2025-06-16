@@ -22,7 +22,7 @@ export class DocumentCardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger
+
   }
 
   viewVersions(): void {

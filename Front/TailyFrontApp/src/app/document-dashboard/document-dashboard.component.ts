@@ -9,6 +9,8 @@ export class DocumentDashboardComponent {
   currentView: 'documents' | 'signatures' = 'documents';
   showForm = false;
 
+  ngOnInit() {}
+
   setView(view: 'documents' | 'signatures') {
     this.currentView = view;
   }

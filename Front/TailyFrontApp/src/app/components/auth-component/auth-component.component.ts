@@ -2,6 +2,7 @@ import { AuthService } from 'src/app/services/auth-service.service';
 import { Component } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { VerificationCode } from 'src/app/DTOs/VerificationCode';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-auth-component',
@@ -25,7 +26,11 @@ export class AuthComponent {
   userId: number | null = null;
   verToken: string | null = null;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private http: HttpClient) {}
+
+  ngOnInit() {
+    localStorage.removeItem('userId'); // Очистка userId при инициализации компонента
+  }
 
   login() {
     this.authService.login(this.username, this.password).subscribe({
@@ -35,6 +40,7 @@ export class AuthComponent {
             console.log('User data:', response);
           }
         });
+
         this.errorMessage = '';
        },
       error: () => {

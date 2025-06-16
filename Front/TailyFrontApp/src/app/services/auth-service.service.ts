@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { JwtRequest } from '../DTOs/JwtRequest';
 import { JwtResponse } from '../DTOs/JwtResponse';
@@ -48,7 +48,18 @@ export class AuthService {
       withCredentials: true // 🔑 отправит/примет cookie
     }).pipe(
       tap(() => {
-        this.router.navigate(['/dashboard']);
+              this.http.get<{ username: string, userId: number }>('/users/myName', { withCredentials: true })
+      .subscribe({
+        next: res => {
+          localStorage.setItem('userId', res.userId.toString());
+
+          console.log('User ID stored:', res.userId);
+        },
+        error: () => {
+          console.log('Error fetching user data');
+        }
+      });
+        this.router.navigate(['/EDO']);
       })
     );
   }
@@ -62,11 +73,16 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('jwt');
-    this.router.navigate(['/auth']);
+    this.http.post(`${this.authUrl}/logout`, {}, { withCredentials: true }).subscribe({
+      next: () => this.router.navigate(['/auth']),
+      error: () => this.router.navigate(['/auth']) // даже если logout не удался, просто перенаправляем
+    });
   }
 
-  isAuthenticated(): boolean {
-    return !!localStorage.getItem('jwt');
+  isAuthenticated(): Observable<boolean> {
+    return this.http.get<{ authenticated: boolean }>(`${this.authUrl}/check`).pipe(
+      map(response => response.authenticated),
+      catchError(() => of(false)) // В случае ошибки (например, 401) считаем, что не аутентифицирован
+    );
   }
 }

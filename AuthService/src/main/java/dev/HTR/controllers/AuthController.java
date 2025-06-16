@@ -10,6 +10,7 @@ import dev.HTR.services.AuthService;
 import dev.HTR.services.KafkaProducerService;
 import dev.HTR.utils.JwtUtils;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
@@ -17,9 +18,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
@@ -140,6 +144,34 @@ public class AuthController {
                 );
         AuthUserEntity newUser = authService.createNewUser(reqUser);
         return ResponseEntity.ok(newUser);
-
     }
+
+    @GetMapping("/auth/check")
+    public ResponseEntity<?> checkAuthStatus(HttpServletRequest request) {
+        // Пример: если фильтр безопасности уже проверил JWT и пользователь аутентифицирован
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        boolean isAuthenticated = authentication != null &&
+                authentication.isAuthenticated() &&
+                !(authentication instanceof AnonymousAuthenticationToken);
+
+        return ResponseEntity.ok(Map.of("authenticated", isAuthenticated));
+    }
+
+    @PostMapping("/auth/logout")
+    public ResponseEntity<?> logout(HttpServletResponse response) {
+        ResponseCookie cookie = ResponseCookie.from("jwt", "")
+                .httpOnly(true)
+                .secure(true) // только если используешь HTTPS
+                .path("/")
+                .maxAge(0) // удаляет cookie
+                .sameSite("Strict")
+                .build();
+
+        response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+
+        return ResponseEntity.ok(Map.of("message", "Logged out successfully"));
+    }
+
+
 }

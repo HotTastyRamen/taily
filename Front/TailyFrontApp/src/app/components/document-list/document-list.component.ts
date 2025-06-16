@@ -16,6 +16,7 @@ export class DocumentListComponent implements OnInit {
   pageIndex = 0;
   totalElements = 0;
   filterValue: string = "";
+  loading = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -29,37 +30,41 @@ export class DocumentListComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-        //     if (this.paginator) {
-        //   this.paginator.length = this.totalElements;
-        // }
+
   }
 
-  fetchDocuments(): void {
-    const creatorId = 2;
-    const title = this.filterValue || '';
-    const page = this.pageIndex;
-    const size = this.pageSize;
-    const sortBy = 'createdAt';
-    const sortDir: 'ASC' | 'DESC' = 'ASC';
+fetchDocuments(): void {
+  this.loading = true;
+  const title = this.filterValue || '';
+  const page = this.pageIndex;
+  const size = this.pageSize;
+  const sortBy = 'createdAt';
+  const sortDir: 'ASC' | 'DESC' = 'ASC';
 
-    this.documentService
-      .getCreatedDocuments(creatorId, title, page, size, sortBy, sortDir)
-      .subscribe((response) => {
-        debugger
+  this.documentService
+    .getCreatedDocuments( title, page, size, sortBy, sortDir)
+    .subscribe({
+      next: (response) => {
+        this.loading = false;
         this.allDocuments = response.content;
         this.totalElements = response.totalElements;
         console.log('Fetched documents:', this.allDocuments);
-        debugger
         this.updatePage();
-      });
-  }
+      },
+      error: (err) => {
+        this.loading = false;
+        console.error('Ошибка при загрузке документов:', err);
+      }
+    });
+}
+
 
 
   updatePage(): void {
-    debugger
+
     const start = this.pageIndex * this.pageSize;
     const end = start + this.pageSize;
-    debugger
+
     this.paginatedDocuments = this.allDocuments.slice(start, end);
   }
 

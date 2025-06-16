@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { AuthService } from './services/auth-service.service';
 
@@ -12,7 +13,7 @@ export class AppComponent {
     password = '123';
     errorMessage = '123';
 
-  constructor() {}
+  constructor(public router: Router) {}
 
   // login() {
   //   this.authService.login(this.username, this.password).subscribe({

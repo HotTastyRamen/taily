@@ -4,6 +4,10 @@
    placeholder="Ex. Mia" #input>
 </mat-form-field>
 
+<div *ngIf="loading" class="load">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+
 <div *ngIf="allDocuments?.length">
   <div *ngFor="let doc of allDocuments" class="document-card">
     <app-document-card [document]="doc"></app-document-card>

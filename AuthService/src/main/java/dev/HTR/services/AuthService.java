@@ -11,6 +11,8 @@ public interface AuthService {
 
     UserDetails loadUserByUsername(String username);
 
+    public String getPhoneNumberById(Long id);
+
     public Optional<AuthUserEntity> findById(Long userId);
 
     public Optional<AuthUserEntity> findByUsername(String username);

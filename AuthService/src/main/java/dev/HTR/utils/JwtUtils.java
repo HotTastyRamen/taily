@@ -1,8 +1,10 @@
 package dev.HTR.utils;
 
+import dev.HTR.services.AuthService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -24,12 +26,16 @@ public class JwtUtils {
     @Value("${jwt.lifetime}")
     private Duration jwtLifetime;
 
+    @Autowired
+    private AuthService authService;
+
     public String generateAuthToken(UserDetails userDetails){
         Map<String, Object> claims = new HashMap<>();
         List<String> roleList = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .toList();
         claims.put("roles", roleList);
+        claims.put("id", authService.findByUsername(userDetails.getUsername()).get().getId());
 
         Date issuedDate = new Date();
         Date expiredDate= new Date(issuedDate.getTime() + jwtLifetime.toMillis());

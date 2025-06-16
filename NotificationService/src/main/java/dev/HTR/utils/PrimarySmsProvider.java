@@ -31,8 +31,9 @@ public class PrimarySmsProvider implements SmsProvider {
                 apiUrl,
                 apiKey,
                 phone,
-                URLEncoder.encode(text, StandardCharsets.UTF_8)
+                text
         );
+        System.out.println(url);
 
         try {
             // Получаем ответ как Map (или можешь создать DTO-класс)

@@ -1,30 +1,34 @@
-<div class="card">
-  <div class="icon">
-    🖊️
-  </div>
+<div class="card-container">
+  <div class="card" [class.blurred]="showVerificationField">
+  <div class="icon">🖊️</div>
 
   <div class="details">
-    <div class="title">
-      Подпись к документу #{{ signature.documentId }}
-    </div>
+    <div class="title">Подпись к документу #{{ localSignature.documentId }}</div>
     <div class="status">
-      Статус: <strong>{{ signature.status }}</strong>
+      Статус: <strong>{{ localSignature.status }}</strong>
     </div>
-    <div class="status" *ngIf="signature.signedAt">
-      Подписано: {{ signature.signedAt | date: 'medium' }}
+    <div class="status" *ngIf="localSignature.signedAt">
+      Подписано: {{ localSignature.signedAt | date: 'medium' }}
     </div>
   </div>
 
   <mat-card-actions>
-    <button mat-raised-button  (click)="downloadLatestVersion()">Скачать документ</button>
-    <button mat-raised-button (click)="activateCodeInput()">Подтвердить</button>
+    <button mat-raised-button (click)="downloadLatestVersion()">Скачать документ</button>
+    <button mat-raised-button *ngIf="!localSignature.signedAt" (click)="activateCodeInput()">Подтвердить</button>
   </mat-card-actions>
 
-  <div *ngIf="showVerificationField" class="verification">
-    <mat-form-field>
-      <input matInput [(ngModel)]="smsCode" placeholder="Введите SMS-код">
-    </mat-form-field>
-    <button mat-button (click)="sendVerificationCode()">Отправить</button>
-    <p class="message">{{ message }}</p>
   </div>
+  <div class="verification-overlay" *ngIf="showVerificationField">
+    <div class="verification-content">
+
+    <mat-form-field appearance="fill" class="code-input">
+      <input matInput [(ngModel)]="smsCode" placeholder="Введите SMS-код" />
+    </mat-form-field>
+    <p class="verification-title"> Вам было направлено подтверждение подписи. Введите код из СМС: </p>
+    <div class="verification-buttons">
+      <button mat-raised-button color="primary" (click)="verificateCode()">Отправить</button>
+      <button mat-stroked-button color="warn" (click)="cancelVerification()">Закрть</button>
+    </div>
+
+      </div>
 </div>

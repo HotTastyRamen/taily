@@ -14,4 +14,5 @@ module.exports = {
   '/signatures': createTarget(8085),
   '/getVerToken': createTarget(8084),
   '/document-versions': createTarget(8085),
+  '/confirmSignatureCode' : createTarget(8084),
 };
