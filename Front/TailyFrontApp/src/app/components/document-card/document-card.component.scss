@@ -1,0 +1,93 @@
+$primary-bg: #b7ceff;
+$secondary-bg: #d9f4f7;
+$light-purple: #e4d7f9;
+$dark-purple: #ab90f5;
+$light-green: #d6fcd3;
+$light-blue: #e1efff;
+$accent-blue: #b7ceff;
+$text-color: #222;
+$primary-color: #e8ecfc;
+$font-family: 'Inter', sans-serif;
+$border-color: #000000;
+$button-color: #b7ceff;
+$button-hover: #739aec;
+$danger-color: #d80808;
+$shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+$border-radius: 16px;
+
+@font-face {
+  font-family: 'Raydis';
+  src: url( '/assets/fonts/ofont.ru_Raydis.ttf') format('truetype');
+  font-weight:lighter;
+  font-style: normal;
+}
+
+:host {
+  display: block;
+  font-family: $font-family;
+}
+
+.card {
+  display: flex;
+  align-items:center;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: $light-blue;
+  border-radius: $border-radius;
+  box-shadow: $shadow;
+  padding: 16px;
+  color: $text-color;
+  transition: box-shadow 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.icon {
+  font-size: 48px;
+  margin-right: 16px;
+  color: $dark-purple;
+}
+
+.details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.status {
+  font-size: 14px;
+  color: $text-color;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+div{
+  font-family: 'Raydis', sans-serif !important;
+  font-size: 0,5em;
+}
+
+button {
+  background-color: $button-color;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: $text-color;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: $button-hover;
+}

@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Версии документа</h2>
+<mat-dialog-content>
+
+  <h3>Последняя версия</h3>
+  <a [href]="latestVersion.downloadUrl" target="_blank" class="latest-link">
+    Версия #{{ latestVersion.versionNumber }} ({{ latestVersion.uploadedAt | date:'short' }})
+  </a>
+
+  <h3 class="mt-4">Предыдущие версии</h3>
+  <ul>
+    <li *ngFor="let version of versions">
+      <a [href]="version.downloadUrl" target="_blank">
+        Версия #{{ version.versionNumber }} ({{ version.uploadedAt | date:'short' }})
+      </a>
+    </li>
+  </ul>
+
+  <mat-paginator
+    [length]="totalVersions"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 25]"
+    (page)="onPageChange($event)">
+  </mat-paginator>
+
+  <h3 class="mt-4">Загрузить новую версию</h3>
+  <input type="file" (change)="onFileSelected($event)" />
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Закрыть</button>
+</mat-dialog-actions>

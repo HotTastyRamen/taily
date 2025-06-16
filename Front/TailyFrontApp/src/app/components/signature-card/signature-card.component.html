@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="icon">
+    🖊️
+  </div>
+
+  <div class="details">
+    <div class="title">
+      Подпись к документу #{{ signature.documentId }}
+    </div>
+    <div class="status">
+      Статус: <strong>{{ signature.status }}</strong>
+    </div>
+    <div class="status" *ngIf="signature.signedAt">
+      Подписано: {{ signature.signedAt | date: 'medium' }}
+    </div>
+  </div>
+
+  <mat-card-actions>
+    <button mat-raised-button  (click)="downloadLatestVersion()">Скачать документ</button>
+    <button mat-raised-button (click)="activateCodeInput()">Подтвердить</button>
+  </mat-card-actions>
+
+  <div *ngIf="showVerificationField" class="verification">
+    <mat-form-field>
+      <input matInput [(ngModel)]="smsCode" placeholder="Введите SMS-код">
+    </mat-form-field>
+    <button mat-button (click)="sendVerificationCode()">Отправить</button>
+    <p class="message">{{ message }}</p>
+  </div>
+</div>

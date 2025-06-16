@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  background: linear-gradient(130deg,
+  #b7ceff 0%,
+  #d9f4f7 50%,
+  #b7ceff 150%);
+}
+
+mat-paginator {
+  align-self: center;
+  border-radius: 8px;
+}
+
+mat-form-field {
+  width: 100%;
+  background-color: #e1efff;
+  color: #222;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  border-radius: 8px 8px 0 0 ;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.document-card{
+  margin-bottom: 10px;
+}

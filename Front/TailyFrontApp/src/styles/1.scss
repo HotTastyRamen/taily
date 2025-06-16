@@ -1,0 +1,42 @@
+@use '@angular/material' as mat;
+
+// === Цвета из твоей палитры ===
+$primary: mat.define-palette(mat.$green-palette, 200); // соответствует $light-green
+$accent: mat.define-palette(mat.$blue-palette, 200);   // соответствует $accent-blue
+$warn: mat.define-palette(mat.$red-palette, 700);
+
+$theme: mat.define-light-theme((
+  color: (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn
+  ),
+  typography: mat.define-typography-config((
+    fontFamily: 'Inter, sans-serif',
+    body-1: (
+
+    )
+  )),
+  density: 0,
+));
+
+$custom-typography: mat.define-typography-config((
+  fontFamily: 'Inter, sans-serif',
+  button: (
+    fontSize: 16px,
+    fontWeight: 500
+  ),
+  body-1: (
+    fontSize: 16px
+  )
+));
+
+$theme: mat.define-light-theme((
+  color: (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn
+  ),
+  typography: $custom-typography
+));
+

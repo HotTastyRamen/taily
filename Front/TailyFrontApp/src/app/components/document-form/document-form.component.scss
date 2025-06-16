@@ -1,0 +1,81 @@
+$primary-bg: #b7ceff;
+$secondary-bg: #d9f4f7;
+$light-purple: #e4d7f9;
+$dark-purple: #ab90f5;
+$light-green: #d6fcd3;
+$light-blue: #e1efff;
+$accent-blue: #b7ceff;
+$text-color: #222;
+$primary-color: #e8ecfc;
+$font-family: 'Inter', sans-serif;
+$border-color: #000000;
+$button-color: #b7ceff;
+$button-hover: #739aec;
+$danger-color: #d80808;
+$shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+$border-radius: 16px;
+@font-face {
+  font-family: 'Raydis';
+  src: url('/assets/fonts/ofont.ru_Raydis.ttf') format('truetype');
+  font-weight: lighter;
+  font-style: normal;
+}
+.form-card {
+  background-color: $light-blue;
+  padding: 24px;
+  border-radius: $border-radius;
+  box-shadow: $shadow;
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: $font-family;
+  color: $text-color;
+}
+
+input,textarea{
+  width: 90%;
+}
+
+.form-label {
+  display: block;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-family: 'Raydis', sans-serif;
+}
+
+.input,
+textarea {
+  width: 90%;
+  padding: 10px 12px;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  font-size: 14px;
+  font-family: $font-family;
+  background-color: #fff;
+  resize: vertical;
+}
+
+.file-input {
+  margin-top: 8px;
+}
+
+.submit-btn {
+  margin-top: 24px;
+  background-color: $button-color;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: $text-color;
+  font-weight: 600;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.submit-btn:hover {
+  background-color: $button-hover;
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

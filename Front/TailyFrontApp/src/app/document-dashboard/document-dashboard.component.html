@@ -1,0 +1,16 @@
+<div class="wrapper">
+  <div class="toolbar">
+    <button [class.active]="currentView === 'documents'"
+      (click)="setView('documents')">Документы</button>
+    <button [class.active]="currentView === 'signatures'"
+      (click)="setView('signatures')">Подписи</button>
+    <button class="add-btn" (click)="toggleForm()">+ Добавить документ</button>
+  </div>
+
+  <div class="content">
+    <app-document-list *ngIf="currentView === 'documents'"></app-document-list>
+    <app-signature-list *ngIf="currentView === 'signatures'"></app-signature-list>
+  </div>
+
+  <app-document-form *ngIf="showForm" (close)="toggleForm()"></app-document-form>
+</div>

@@ -1,0 +1,84 @@
+@font-face {
+  font-family: 'Raydis';
+  src: url('/assets/fonts/ofont.ru_Raydis.ttf') format('truetype');
+  font-weight: lighter;
+  font-style: normal;
+}
+
+h2[mat-dialog-title] {
+  font-family: 'Raydis', sans-serif !important;
+  color: #1bc68b;
+  font-size: 1.6em;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+h3 {
+  font-family: 'Raydis', sans-serif !important;
+  font-size: 1.2em;
+  color: #1bc68b;
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
+.mt-4 {
+  margin-top: 32px;
+}
+
+.latest-link {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-family: 'Raydis', sans-serif;
+  font-size: 1em;
+  color: #00796b;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    color: #004d40;
+  }
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+
+  li {
+    margin-bottom: 8px;
+
+    a {
+      font-family: 'Raydis', sans-serif;
+      font-size: 0.95em;
+      color: #333;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+        color: #1bc68b;
+      }
+    }
+  }
+}
+
+input[type="file"] {
+  margin-top: 8px;
+  font-family: 'Raydis', sans-serif;
+  font-size: 0.9em;
+  width: 80%;
+}
+
+mat-paginator {
+  margin-top: 16px;
+  margin-right: 10vw;
+}
+
+mat-dialog-actions {
+  margin-top: 24px;
+
+  button {
+    font-family: 'Raydis', sans-serif;
+    font-size: 0.95em;
+    color: #1bc68b;
+  }
+}

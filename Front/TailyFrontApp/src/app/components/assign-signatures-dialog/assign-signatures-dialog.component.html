@@ -1,0 +1,50 @@
+<h2 mat-dialog-title class="dialog-title">Назначение подписей</h2>
+
+<mat-dialog-content class="dialog-content">
+
+  <section class="section">
+    <h3>Выберите пользователей для подписи</h3>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Пользователи</mat-label>
+      <mat-select [(value)]="selectedUserIds" multiple>
+        <ng-container *ngFor="let user of availableUsers">
+          <mat-option *ngIf="!isUserAlreadyAssigned(user.id)" [value]="user.id">
+            {{ user.username }}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="actions">
+      <button mat-raised-button color="primary"
+              (click)="assignSignatures()"
+              [disabled]="selectedUserIds.length === 0">
+        Назначить
+      </button>
+    </div>
+  </section>
+
+  <section class="section mt">
+    <h3>Назначенные подписи</h3>
+
+    <ul class="signature-list">
+      <li *ngFor="let s of existingPagedSignatures">
+        <span class="username">{{ userIdToNameMap.get(s.userId) || 'неизвестно' }}</span>
+        — статус: <span class="status">{{ s.status }}</span>
+      </li>
+    </ul>
+
+    <mat-paginator
+      [length]="signaturesTotal"
+      [pageSize]="signaturesPageSize"
+      [pageSizeOptions]="[5, 10, 25]"
+      (page)="onSignaturesPageChange($event)">
+    </mat-paginator>
+  </section>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Закрыть</button>
+</mat-dialog-actions>

@@ -1,0 +1,24 @@
+<div *ngIf="loading" class="load">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<div *ngIf="!loading && signatures.length === 0">
+  Подписи не найдены.
+</div>
+
+<div class="signature-list">
+  <app-signature-card
+    *ngFor="let signature of signatures"
+    [signature]="signature">
+  </app-signature-card>
+</div>
+
+<mat-paginator
+  [length]="totalElements"
+  [pageIndex]="page"
+  [pageSize]="size"
+  [pageSizeOptions]="[5, 10, 20]"
+  (page)="onPageChange($event)">
+</mat-paginator>

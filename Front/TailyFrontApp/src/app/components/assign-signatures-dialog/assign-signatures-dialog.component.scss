@@ -1,0 +1,71 @@
+@font-face {
+  font-family: 'Raydis';
+  src: url( '/assets/fonts/ofont.ru_Raydis.ttf') format('truetype');
+  font-weight:lighter;
+  font-style: normal;
+}
+
+mat-label{
+  font-family: 'Raydis', sans-serif !important;
+  font-size: 0.8em;
+}
+
+h3{
+  font-family: 'Raydis', sans-serif !important;
+  font-size: 1.2em;
+  color: #1bc68b;
+  margin-bottom: 16px;
+}
+
+.dialog-title {
+  font-family: 'Raydis', sans-serif !important;
+  color: #1bc68b;
+  font-size: 1.4em;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.dialog-content {
+  padding: 16px;
+}
+
+.section {
+  margin-bottom: 24px;
+}
+
+.mt {
+  margin-top: 32px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.actions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.signature-list {
+  list-style: none;
+  padding-left: 0;
+
+  li {
+    margin-bottom: 8px;
+    font-family: 'Raydis', sans-serif;
+    font-size: 0.95em;
+
+    .username {
+      font-weight: bold;
+    }
+
+    .status {
+      color: #888;
+    }
+  }
+}
+
+mat-paginator {
+  margin-top: 12px;
+}

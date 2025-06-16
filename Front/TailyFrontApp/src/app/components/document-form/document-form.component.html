@@ -1,0 +1,21 @@
+<div class="form-card">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <label class="form-label">Название документа</label>
+    <input class="input" formControlName="name" type="text" placeholder="Введите название" />
+
+    <label class="form-label">Описание</label>
+    <textarea
+      class="textarea"
+      formControlName="description"
+      placeholder="Введите описание (plain text)"
+    ></textarea>
+
+    <label class="form-label">Загрузите файл</label>
+    <input class="file-input" type="file" (change)="onFileSelected($event)" />
+
+    <button class="submit-btn" type="submit"
+      [disabled]="isSubmitting || form.invalid || !fileToUpload">
+        {{ isSubmitting ? 'Загрузка...' : 'Создать документ' }}
+    </button>
+  </form>
+</div>

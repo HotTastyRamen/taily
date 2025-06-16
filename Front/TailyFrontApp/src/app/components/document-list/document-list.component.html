@@ -1,0 +1,18 @@
+<mat-form-field>
+  <mat-label>Поиск</mat-label>
+  <input matInput (keyup)="applyFilter($event)"
+   placeholder="Ex. Mia" #input>
+</mat-form-field>
+
+<div *ngIf="allDocuments?.length">
+  <div *ngFor="let doc of allDocuments" class="document-card">
+    <app-document-card [document]="doc"></app-document-card>
+  </div>
+</div>
+
+<mat-paginator
+  [length]="totalElements"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[5, 10, 20]"
+  (page)="onPageChange($event)">
+</mat-paginator>

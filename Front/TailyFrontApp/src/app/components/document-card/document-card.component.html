@@ -1,0 +1,17 @@
+<mat-card class="card">
+  <div class="icon">📄</div>
+
+  <div class="details">
+    <div class="title">{{ document.title }}</div>
+    <div class="status">
+      Статус: {{ document.status }}<br>
+      Создан: {{ document.createdAt | date:'dd.MM.yyyy HH:mm' }}<br>
+      {{ document.isSignedByUser ? 'Подписан вами' : 'Не подписан вами' }}
+    </div>
+  </div>
+
+  <div class="actions">
+    <button mat-button (click)="viewVersions()">Версии</button>
+    <button mat-button (click)="openAssignDialog()">Подписи</button>
+  </div>
+</mat-card>
